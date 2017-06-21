@@ -12,14 +12,23 @@ export default class InputView extends React.Component {
         this.setState({value: event.target.value});
     };
 
+    /* NOTE: due to way the chunks are shown with space between them it's not completely clear whether the input should
+     * also contain whitespace or not. A solution is to just strip all whitespace from the input. The problem being that,
+     * if the word being memorized contains whitespace, we will ignore it also.
+     * TODO handle whitespace in a reasonable manner */
     handleSubmit = (event) => {
         event.preventDefault();
-        if (this.state.value === this.props.chunk.left + this.props.chunk.right) {
+        if (this.strip(this.state.value) === this.strip(this.props.chunk.left + this.props.chunk.right)) {
             this.props.onComplete()
         } else {
-            alert("Wrong, try again. Expected: " + (this.props.chunk.left + this.props.chunk.right))
+            alert("Wrong, try again.\nExpected: " + (this.props.chunk.left + this.props.chunk.right))
         }
     };
+
+    // Removes *all* whitespace from a string
+    strip(string) {
+     return string.replace(/\s/g,"")
+    }
 
     render() {
         return (
