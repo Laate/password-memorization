@@ -1,11 +1,12 @@
 import React from 'react'
+import './ChunkView.css'
 
 
 export default class ChunkView extends React.Component {
 
     constructor(props) {
         super(props);
-        this.tickrate = 1000;
+        this.tickrate = 10;
         this.state = {
             remainingTime: this.props.time
         }
@@ -30,7 +31,9 @@ export default class ChunkView extends React.Component {
     render() {
         return (
             <div>
-                <p>{this.state.remainingTime / 1000} seconds left</p>
+                <div>
+                    <progress max="100" value={(this.state.remainingTime / this.props.time) * 100}></progress>
+                </div>
                 {this.props.chunk}
             </div>
         );
