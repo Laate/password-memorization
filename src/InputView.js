@@ -27,7 +27,7 @@ export default class InputView extends React.Component {
                 <p>What was the chunk?</p>
                 <form onSubmit={this.handleSubmit}>
                     <label>
-                        <input type="text" className="input" value={this.state.value} onChange={this.handleChange} />
+                        <input type="text" className="input" value={this.state.value} onChange={this.handleChange} autoFocus/>
                     </label>
                     <input type="submit" className="submit" value="Submit"/>
                 </form>
