@@ -24,7 +24,7 @@ export default class InputView extends React.Component {
     render() {
         return (
             <div>
-                <p>Type the chunks</p>
+                <p>What was the chunk?</p>
                 <form onSubmit={this.handleSubmit}>
                     <label>
                         <input type="text" className="input" value={this.state.value} onChange={this.handleChange} />

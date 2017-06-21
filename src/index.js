@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import InputView from './InputView'
 import StartView from './StartView'
-import ChunkModule from './ChunkModule'
 import ChunkView from "./ChunkView";
 import FinishView from "./FinishView";
 
@@ -11,18 +10,29 @@ import FinishView from "./FinishView";
 class ChunkApp extends React.Component {
     constructor() {
         super();
-        this.chunkModule = new ChunkModule();
-        const firstChunk = this.chunkModule.next();
+
+        const viewQueue = this.initViewQueue();
         this.state = {
-            chunk: firstChunk,
-            viewQueue: [
-                <StartView start={this.changeView}/>,
-                <ChunkView chunk={firstChunk} onComplete={this.changeView} time={6000}/>,
-                <InputView chunk={firstChunk} onComplete={this.changeView}/>,
-                <FinishView/>
-            ],
+            viewQueue: viewQueue,
             remainingTime: 3000
         };
+    }
+
+    initViewQueue() {
+        // Example flow for the password "123456abcdef"
+        // TODO make generalized and remove hardcoding
+        const viewQueue = [<StartView start={this.changeView}/>];
+        const chunks = ["123", "456", "123456", "abc", "def", "abcdef", "123456", "abcdef", "123456abcdef"];
+        for (let i = 0; i < chunks.length; i++) {
+            const chunk = chunks[i];
+            viewQueue.push(
+                <ChunkView chunk={chunk} onComplete={this.changeView} time={6000}/>,
+                <InputView chunk={chunk} onComplete={this.changeView}/>
+            );
+        }
+        viewQueue.push(<FinishView/>);
+
+        return viewQueue
     }
 
     changeView = () => {
@@ -38,7 +48,6 @@ class ChunkApp extends React.Component {
                 <div className="middle">
                     <div className="layout">
                         {this.state.viewQueue[0]}
-                        {this.chunkModule.texts}
                     </div>
                 </div>
             </div>
