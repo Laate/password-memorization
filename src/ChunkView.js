@@ -29,12 +29,16 @@ export default class ChunkView extends React.Component {
     };
 
     render() {
+        const style = {
+            'width': `${(this.state.remainingTime / this.props.time) * 100}%`
+        };
+
         return (
             <div>
-                <div>
-                    <progress max="100" value={(this.state.remainingTime / this.props.time) * 100}></progress>
+                <div className="chunk">{this.props.chunk}</div>
+                <div className="progressbar">
+                    <div className="progress" style={style}></div>
                 </div>
-                {this.props.chunk}
             </div>
         );
     }

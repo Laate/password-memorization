@@ -26,7 +26,7 @@ class ChunkApp extends React.Component {
         for (let i = 0; i < chunks.length; i++) {
             const chunk = chunks[i];
             viewQueue.push(
-                <ChunkView chunk={chunk} onComplete={this.changeView} time={6000}/>,
+                <ChunkView chunk={chunk} onComplete={this.changeView} time={3000}/>,
                 <InputView chunk={chunk} onComplete={this.changeView}/>
             );
         }

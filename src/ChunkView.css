@@ -1,0 +1,21 @@
+.chunk {
+    padding-bottom: 20%;
+}
+
+.progressbar {
+    background-color: lightgrey;
+    height: 0.5em;
+}
+
+.progress {
+    background-color: forestgreen;
+    height: 0.5em;
+}
+
+
+
+/*
+    margin-left: auto;
+    margin-right: auto;
+
+*/
