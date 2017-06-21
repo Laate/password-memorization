@@ -14,17 +14,17 @@ export default class InputView extends React.Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        if (this.state.value === this.props.chunk) {
+        if (this.state.value === this.props.chunk.left + this.props.chunk.right) {
             this.props.onComplete()
         } else {
-            alert("Wrong, try again (got: " + this.state.value + ", expected: " + this.props.chunk + ")")
+            alert("Wrong, try again. Expected: " + (this.props.chunk.left + this.props.chunk.right))
         }
     };
 
     render() {
         return (
             <div>
-                <p>What was the chunk?</p>
+                <div className="text">What was the chunk?</div>
                 <form onSubmit={this.handleSubmit}>
                     <label>
                         <input type="text" className="input" value={this.state.value} onChange={this.handleChange} autoFocus/>

@@ -1,21 +1,33 @@
-.chunk {
-    padding-bottom: 20%;
+.chunks {
+    display: table;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 5%;
+}
+
+.chunk.left {
+    display: table-cell;
+}
+
+.chunk.right {
+    display: table-cell;
+}
+
+.space {
+    display: table-cell;
+    width: 10em;
+    height: 1px;
 }
 
 .progressbar {
     background-color: lightgrey;
     height: 0.5em;
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .progress {
     background-color: forestgreen;
     height: 0.5em;
 }
-
-
-
-/*
-    margin-left: auto;
-    margin-right: auto;
-
-*/

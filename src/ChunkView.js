@@ -35,7 +35,11 @@ export default class ChunkView extends React.Component {
 
         return (
             <div>
-                <div className="chunk">{this.props.chunk}</div>
+                <div className="chunks">
+                    <div className="chunk left">{this.props.chunk.left}</div>
+                    <div className="space"></div>
+                    <div className="chunk right">{this.props.chunk.right}</div>
+                </div>
                 <div className="progressbar">
                     <div className="progress" style={style}></div>
                 </div>

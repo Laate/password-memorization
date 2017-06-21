@@ -12,23 +12,27 @@ class ChunkApp extends React.Component {
         super();
 
         const viewQueue = this.initViewQueue();
-        this.state = {
-            viewQueue: viewQueue,
-            remainingTime: 3000
-        };
+        this.state = {viewQueue: viewQueue};
     }
 
     initViewQueue() {
         // Example flow for the password "123456abcdef"
         // TODO make generalized and remove hardcoding
         const viewQueue = [<StartView start={this.changeView}/>];
-        const chunks = ["123", "456", "123456", "abc", "def", "abcdef", "123456", "abcdef", "123456abcdef"];
+        const chunks = [
+            {left:"123", right:""},
+            {left: "", right: "abc"},
+            {left: "123", right: "abc"},
+            {left: "456", right: ""},
+            {left: "", right: "def"},
+            {left: "456", right: "def"},
+            {left: "123 456", right: "abc def"}];
+
         for (let i = 0; i < chunks.length; i++) {
             const chunk = chunks[i];
             viewQueue.push(
                 <ChunkView chunk={chunk} onComplete={this.changeView} time={3000}/>,
-                <InputView chunk={chunk} onComplete={this.changeView}/>
-            );
+                <InputView chunk={chunk} onComplete={this.changeView}/>);
         }
         viewQueue.push(<FinishView/>);
 
