@@ -5,13 +5,14 @@ export default class ChunkView extends React.Component {
 
     constructor(props) {
         super(props);
+        this.tickrate = 1000;
         this.state = {
             remainingTime: this.props.time
         }
     }
 
     componentWillMount() {
-        this.remainingTimer = setInterval(this.tick, 1000);
+        this.remainingTimer = setInterval(this.tick, this.tickrate);
     }
 
     componentWillUnmount() {
@@ -19,12 +20,10 @@ export default class ChunkView extends React.Component {
     }
 
     tick = () => {
-        const remainingTime = this.state.remainingTime - 1000;
-        console.log("tick " + remainingTime);
+        const remainingTime = this.state.remainingTime - this.tickrate;
+        this.setState({remainingTime: remainingTime});
         if (remainingTime <= 0) {
             this.props.onComplete()
-        } else {
-            this.setState({ remainingTime: remainingTime })
         }
     };
 
