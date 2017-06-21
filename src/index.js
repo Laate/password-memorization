@@ -34,9 +34,13 @@ class ChunkApp extends React.Component {
 
     render() {
         return (
-            <div className="layout">
-                {this.state.viewQueue[0]}
-                {this.chunkModule.texts}
+            <div className="outer">
+                <div className="middle">
+                    <div className="layout">
+                        {this.state.viewQueue[0]}
+                        {this.chunkModule.texts}
+                    </div>
+                </div>
             </div>
         );
     }
