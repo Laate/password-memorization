@@ -33,7 +33,7 @@ export default class InputView extends React.Component {
     render() {
         return (
             <div>
-                <div className="text">What was the chunk?</div>
+                <div className="text">What was the text?</div>
                 <form onSubmit={this.handleSubmit}>
                     <label>
                         <input type="text" className="input" value={this.state.value} onChange={this.handleChange} autoFocus/>
