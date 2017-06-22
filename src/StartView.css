@@ -1,4 +1,16 @@
 .startButton {
-    width: 10em;
-    height: 4em;
+    width: 5em;
+    height: 2em;
+    font-size: xx-large;
+    background-color: #2B87D1;
+    border: none;
+    outline: solid white;
+    color: white;
+    box-shadow: none;
+}
+
+.startButton:hover {
+    font-size: xx-large;
+    background-color: white;
+    color: #2B87D1;
 }

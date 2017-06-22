@@ -20,7 +20,7 @@
 }
 
 .progressbar {
-    background-color: lightgrey;
+    background-color: #226CA7;
     height: 0.5em;
     width: 30%;
     margin-left: auto;
@@ -28,6 +28,6 @@
 }
 
 .progress {
-    background-color: forestgreen;
+    background-color: white;
     height: 0.5em;
 }
