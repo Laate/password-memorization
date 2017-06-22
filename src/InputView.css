@@ -5,8 +5,15 @@
 .input {
     width: 30%;
     height: 2em;
+    border: none;
+    outline: none;
+    font-size: x-large;
+    font-weight: bold;
+    background-color: #226CA7;
+    color: white;
 }
 
 .submit {
-    height: 2em;
+    font-size: medium;
+    color: #226CA7;
 }

@@ -38,7 +38,7 @@ export default class InputView extends React.Component {
                     <label>
                         <input type="text" className="input" value={this.state.value} onChange={this.handleChange} autoFocus/>
                     </label>
-                    <input type="submit" className="submit" value="Submit"/>
+                    <div className="submit">press enter to submit</div>
                 </form>
             </div>
         );
