@@ -8,7 +8,7 @@ export default class StartView extends React.Component {
         return (
             <div>
                 <p>Welcome</p>
-                <p>The idea is to memorize progressingly larger chunks the whole word is memorized.</p>
+                <p>The idea is to memorize progressingly larger chunks until the whole word is memorized.</p>
                 <button className="startButton" onClick={() => this.props.start()}>Start</button>
             </div>
         );
