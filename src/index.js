@@ -5,6 +5,7 @@ import InputView from './InputView'
 import StartView from './StartView'
 import ChunkView from "./ChunkView";
 import FinishView from "./FinishView";
+import { getChunks } from './ChunkModule'
 
 
 class ChunkApp extends React.Component {
@@ -16,19 +17,11 @@ class ChunkApp extends React.Component {
     }
 
     initViewQueue() {
-        // Example flow for the password "123456abcdef"
-        // TODO make generalized and remove hardcoding
         const viewQueue = [<StartView start={this.changeView}/>];
-        const chunks = [
-            {left:"123", right:""},
-            {left: "", right: "abc"},
-            {left: "123", right: "abc"},
-            {left: "456", right: ""},
-            {left: "", right: "def"},
-            {left: "456", right: "def"},
-            {left: "123 456", right: "abc def"}];
+        const chunks = getChunks("abcdef123456");
 
         for (let i = 0; i < chunks.length; i++) {
+            console.log("chunk " + i + " = " + JSON.stringify(chunks[i]));
             const chunk = chunks[i];
             viewQueue.push(
                 <ChunkView chunk={chunk} onComplete={this.changeView} time={3000}/>,
