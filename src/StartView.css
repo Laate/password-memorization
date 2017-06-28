@@ -1,6 +1,7 @@
 .startButton {
     width: 5em;
     height: 2em;
+    ;
     font-size: xx-large;
     background-color: #2B87D1;
     border: none;
@@ -13,4 +14,10 @@
     font-size: xx-large;
     background-color: white;
     color: #2B87D1;
+}
+
+.helpText {
+    font-size: medium;
+    color: #226CA7;
+    padding-bottom: 1em;
 }

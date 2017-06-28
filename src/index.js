@@ -11,14 +11,12 @@ import { getChunks } from './ChunkModule'
 class ChunkApp extends React.Component {
     constructor() {
         super();
-
-        const viewQueue = this.initViewQueue();
-        this.state = {viewQueue: viewQueue};
+        this.state = {viewQueue: [<StartView start={this.start}/>]};
     }
 
-    initViewQueue() {
-        const viewQueue = [<StartView start={this.changeView}/>];
-        const chunks = getChunks("abcdef123456");
+    initViewQueue = (word) => {
+        const viewQueue = [];
+        const chunks = getChunks(word);
 
         for (let i = 0; i < chunks.length; i++) {
             console.log("chunk " + i + " = " + JSON.stringify(chunks[i]));
@@ -30,7 +28,11 @@ class ChunkApp extends React.Component {
         viewQueue.push(<FinishView/>);
 
         return viewQueue
-    }
+    };
+
+    start = (word) => {
+        this.setState({viewQueue: this.initViewQueue(word)});
+    };
 
     changeView = () => {
         const newQueue = this.state.viewQueue.slice(1);
