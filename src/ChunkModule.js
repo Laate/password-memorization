@@ -1,41 +1,25 @@
-export function getChunks(string, chunkSize=3) {
-    const chunks = chunkString(string, chunkSize);
-    const mid = (chunks.length / 2) + (chunks.length % 2);
 
-    return chunkTree(chunks.slice(0, mid), chunks.slice(mid)).reverse();
-}
 
-// Maybe there's a nice regex for this? /.{1,3}/g almost works, but leaves a remainder if not divisible by chunkSize
-function chunkString(string, chunkSize) {
-    const chunks = [];
-    for (let i = 0; i < string.length; i += chunkSize) {
-        if (string.length - i < chunkSize*2) {
-            chunks.push(string.slice(i));
-            break
+export function getChunks(word, chunkSize=3) {
+    const res = [];
+
+    function inner(string, isLeft) {
+        if (string.length <= chunkSize) {
+            isLeft ? res.push({left: string, right: ""}) : res.push({left: "", right: string});
+            return
         }
-        chunks.push(string.slice(i, i + chunkSize ));
+        
+        const mid = Math.ceil((string.length/chunkSize) / 2) * chunkSize;
+        const left = string.slice(0, mid);
+        const right = string.slice(mid);
+
+        res.push({left: left, right: right});
+
+        inner(right, false);
+        inner(left, true);
     }
-    return chunks
+
+    inner(word, true);
+    // The result is built from top down so we reverse to get the correct order
+    return res.reverse()
 }
-
-function chunkTree(leftChunks, rightChunks) {
-    if (leftChunks.length <= 1 && rightChunks.length <= 1) {
-        return split({left: leftChunks.join(""), right: rightChunks.join("")})
-    }
-
-    // Round division upwards on left side to better balance the sides
-    const leftMid = leftChunks.length / 2 + (leftChunks.length % 2);
-    const rightMid = rightChunks.length / 2;
-
-    return [{left: leftChunks.join(""), right: rightChunks.join("")}].concat(
-        chunkTree(rightChunks.slice(0, rightMid), rightChunks.slice(rightMid)),
-        chunkTree(leftChunks.slice(0, leftMid), leftChunks.slice(leftMid)))
-}
-
-function split(chunk) {
-    if (chunk.left && chunk.right) {
-        return [chunk, {left: "", right: chunk.right},{left: chunk.left, right: ""}]
-    }
-    return [chunk]
-}
-
