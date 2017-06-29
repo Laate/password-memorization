@@ -13,7 +13,7 @@ export default class ChunkApp extends React.Component {
         this.state = {viewQueue: [<StartView start={this.start}/>]};
     }
 
-    initViewQueue = (word) => {
+    initViewQueue = (word, time) => {
         const viewQueue = [];
         const chunks = getChunks(word);
 
@@ -21,7 +21,7 @@ export default class ChunkApp extends React.Component {
             console.log("chunk " + i + " = " + JSON.stringify(chunks[i]));
             const chunk = chunks[i];
             viewQueue.push(
-                <ChunkView chunk={chunk} onComplete={this.changeView} time={3000}/>,
+                <ChunkView chunk={chunk} onComplete={this.changeView} time={time*1000}/>,
                 <InputView chunk={chunk} onComplete={this.changeView}/>);
         }
         viewQueue.push(<FinishView/>);
@@ -29,8 +29,8 @@ export default class ChunkApp extends React.Component {
         return viewQueue
     };
 
-    start = (word) => {
-        this.setState({viewQueue: this.initViewQueue(word)});
+    start = (word, time) => {
+        this.setState({viewQueue: this.initViewQueue(word, time)});
     };
 
     changeView = () => {

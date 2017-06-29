@@ -16,8 +16,16 @@
     color: #2B87D1;
 }
 
-.helpText {
-    font-size: medium;
-    color: #226CA7;
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input::placeholder {
+    color: #2B87D1;
+}
+
+.inputDiv {
     padding-bottom: 1em;
 }
