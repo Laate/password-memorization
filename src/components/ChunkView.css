@@ -33,3 +33,9 @@
     background-color: white;
     height: 0.5em;
 }
+
+.helpText {
+    font-size: medium;
+    color: #226CA7;
+}
+
