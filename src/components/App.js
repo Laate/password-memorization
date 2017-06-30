@@ -24,7 +24,7 @@ export default class ChunkApp extends React.Component {
                 <ChunkView chunk={chunk} onComplete={this.changeView} time={time*1000}/>,
                 <InputView chunk={chunk} onComplete={this.changeView}/>);
         }
-        viewQueue.push(<FinishView/>);
+        viewQueue.push(<FinishView reset={this.reset}/>);
 
         return viewQueue
     };
@@ -37,6 +37,12 @@ export default class ChunkApp extends React.Component {
         const newQueue = this.state.viewQueue.slice(1);
         this.setState({
             viewQueue: newQueue
+        })
+    };
+
+    reset = () => {
+        this.setState({
+            viewQueue: [<StartView start={this.start}/>]
         })
     };
 
