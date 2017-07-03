@@ -1,7 +1,6 @@
-.startButton {
+.btn {
     width: 5em;
     height: 2em;
-    ;
     font-size: xx-large;
     background-color: #2B87D1;
     border: none;
@@ -10,7 +9,7 @@
     box-shadow: none;
 }
 
-.startButton:hover {
+.btn:hover {
     font-size: xx-large;
     background-color: white;
     color: #2B87D1;
@@ -29,3 +28,4 @@ input::placeholder {
 .inputDiv {
     padding-bottom: 1em;
 }
+
