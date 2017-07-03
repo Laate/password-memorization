@@ -3,7 +3,7 @@
 ## How to run
 
 * `git clone git@version.aalto.fi:usability-stylometry/password-memorization.git`
-* `cd memo`
+* `cd password-memorization`
 * `npm install`
 * `npm start`
 * The app should now be running at localhost:3000
