@@ -20,9 +20,12 @@ export default class ChunkApp extends React.Component {
         for (let i = 0; i < chunks.length; i++) {
             console.log("Chunk " + i + " = " + JSON.stringify(chunks[i]));
             const chunk = chunks[i];
-            viewQueue.push(
-                <ChunkView chunk={chunk} onComplete={this.changeView} time={settings.time*1000} delay={settings.delay*1000}/>,
-                <InputView chunk={chunk} onComplete={this.changeView}/>);
+            for (let j = 0; j < settings.repetitions; j++) {
+                viewQueue.push(
+                    <ChunkView chunk={chunk} onComplete={this.changeView} time={settings.time * 1000}
+                               delay={settings.delay * 1000}/>,
+                    <InputView chunk={chunk} onComplete={this.changeView}/>);
+            }
         }
         viewQueue.push(<FinishView reset={this.reset}/>);
 
