@@ -26,12 +26,14 @@ export default class StartView extends React.Component {
             console.log("Loaded settings from localStorage");
             return savedSettings
         } else {
-            return {
+            // Default settings
+            return Object.freeze({
                 time: 3,
                 delay: 2,
                 chunkSize: 3,
-                repetitions: 1
-            }
+                repetitions: 1,
+                mode: "normal"
+            })
         }
     };
 

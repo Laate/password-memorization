@@ -16,6 +16,16 @@ export default class SettingsView extends React.Component {
         }
     };
 
+    switchMode = () => {
+        if (this.state.mode === "normal") {
+            this.setState({mode: "sequential" })
+        } else if (this.state.mode === "sequential") {
+            this.setState({mode: "normal"})
+        } else {
+            console.error("unknown game mode " + this.state.mode)
+        }
+    };
+
     validate = (setting, value) => {
         switch (setting) {
             case "time":
@@ -26,8 +36,10 @@ export default class SettingsView extends React.Component {
                 return typeof(value) === 'number' && value > 0 && parseInt(value, 10) === value;
             case "repetitions":
                 return typeof(value) === 'number' && value > 0 && parseInt(value, 10) === value;
+            case "mode":
+                return value === "normal" || value === "sequential";
             default:
-                console.warn("Couldn't validate unknown setting type " + setting);
+                console.error("Couldn't validate unknown setting: " + setting);
                 return false
         }
     };
@@ -68,6 +80,10 @@ export default class SettingsView extends React.Component {
                 {this.settingsField("delay")}
                 {this.settingsField("chunkSize")}
                 {this.settingsField("repetitions")}
+                <div>
+                    <button className="modeButton" onClick={() => this.switchMode()}>{this.state.mode}</button>
+                </div>
+                <p className="settingsText">game mode</p>
                 <div>
                     <button className="btn" onClick={() => this.done()}>OK</button>
                 </div>

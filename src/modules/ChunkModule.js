@@ -33,3 +33,17 @@ export function getChunks(word, chunkSize=3) {
     // The result is built from top down so we reverse to get the correct order
     return res.reverse()
 }
+
+export function getChunksSequential(word, chunkSize=3) {
+    const regex = new RegExp(`.{1,${chunkSize}}`, "g");
+    const chunks = word.match(regex);
+
+    const res = [];
+    for (let i = 1; i <= chunks.length; i++) {
+        const left = chunks.slice(0, i-1).join("");
+        const right = chunks.slice(i-1, i).join("");
+        res.push({left: left, right: right})
+    }
+
+    return res
+}

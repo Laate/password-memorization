@@ -4,7 +4,7 @@ import InputView from './InputView'
 import StartView from './StartView'
 import ChunkView from "./ChunkView";
 import FinishView from "./FinishView";
-import { getChunks } from '../modules/ChunkModule'
+import { getChunks, getChunksSequential } from '../modules/ChunkModule'
 
 
 export default class ChunkApp extends React.Component {
@@ -15,7 +15,9 @@ export default class ChunkApp extends React.Component {
 
     initViewQueue = (word, settings) => {
         const viewQueue = [];
-        const chunks = getChunks(word, settings.chunkSize);
+        const chunks = settings.mode === "normal" ?
+                getChunks(word, settings.chunkSize) :
+                getChunksSequential(word, settings.chunkSize);
 
         for (let i = 0; i < chunks.length; i++) {
             console.log("Chunk " + i + " = " + JSON.stringify(chunks[i]));
