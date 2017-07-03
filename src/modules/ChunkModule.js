@@ -7,9 +7,19 @@ export function getChunks(word, chunkSize=3) {
         if (string.length <= chunkSize) {
             isLeft ? res.push({left: string, right: ""}) : res.push({left: "", right: string});
             return
+        } else if (string.length < chunkSize * 2) {
+            // We want to keep the chunk sizes as even as possible. So if the word length isn't divisible by chunkSize,
+            // we merge the remainder with the last chunk and split it in two. This way minimum chunkSize is
+            // (chunkSize + 1) / 2 instead of 1
+            const cMid = Math.ceil(string.length / 2);
+            const cLeft = string.slice(0, cMid);
+            const cRight = string.slice(cMid);
+            res.push({left: cLeft, right: cRight}, {left: "", right: cRight}, {left: cLeft, right: ""});
+            return
         }
-        
-        const mid = Math.ceil((string.length/chunkSize) / 2) * chunkSize;
+
+        const nofChunks = Math.floor(string.length/chunkSize);
+        const mid = (Math.floor(nofChunks / 2) + (nofChunks % 2)) * chunkSize;
         const left = string.slice(0, mid);
         const right = string.slice(mid);
 
