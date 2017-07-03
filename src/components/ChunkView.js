@@ -37,7 +37,7 @@ export default class ChunkView extends React.Component {
         clearInterval(this.remainingTimer);
         // We don't want to immediately jump to inputting the word; only after a little delay
         this.setState({showText: false});
-        setTimeout(this.props.onComplete, 2000)
+        setTimeout(this.props.onComplete, this.props.delay)
     };
 
     render() {
