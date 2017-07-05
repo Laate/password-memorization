@@ -5,7 +5,11 @@ import './InputView.css'
 export default class InputView extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {value: ''};
+
+        this.state = {
+            value: "",
+            tries: 0
+        };
     }
 
     handleChange = (event) => {
@@ -17,7 +21,13 @@ export default class InputView extends React.Component {
         if (this.state.value === this.props.chunk.left + this.props.chunk.right) {
             this.props.onComplete()
         } else {
-            alert("Wrong, try again.\nDEBUG: expected " + (this.props.chunk.left + this.props.chunk.right))
+            const tries = this.state.tries + 1;
+            if (tries > 2) {
+                this.props.onFail()
+            } else {
+                this.setState({tries: tries});
+                alert(`Wrong, try again.\n${tries}/3 tries\nDEBUG: expected ${this.props.chunk.left + this.props.chunk.right}`)
+            }
         }
     };
 
