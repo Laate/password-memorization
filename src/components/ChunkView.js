@@ -40,6 +40,21 @@ export default class ChunkView extends React.Component {
         setTimeout(this.props.onComplete, this.props.delay)
     };
 
+    chunks = () => {
+        if (this.props.mode === "normal") {
+            return (
+                <div className="chunks">
+                    <pre>
+                        <div className="chunk left">{this.props.chunk.left}</div>
+                        <div className="space"></div>
+                        <div className="chunk right">{this.props.chunk.right}</div>
+                    </pre>
+                </div>)
+        } else {
+            return <div className="chunks">{this.props.chunk}</div>
+        }
+    };
+
     render() {
         const style = {
             'width': `${(this.state.remainingTime / this.props.time) * 100}%`
@@ -47,13 +62,7 @@ export default class ChunkView extends React.Component {
 
         const layout =
             <div>
-                <div className="chunks">
-                    <pre>
-                        <div className="chunk left">{this.props.chunk.left}</div>
-                        <div className="space"></div>
-                        <div className="chunk right">{this.props.chunk.right}</div>
-                    </pre>
-                </div>
+                {this.chunks()}
                 <div className="progressbar">
                     <div className="progress" style={style}></div>
                 </div>

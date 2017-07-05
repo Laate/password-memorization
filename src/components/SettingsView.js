@@ -83,7 +83,7 @@ export default class SettingsView extends React.Component {
                 <div>
                     <button className="modeButton" onClick={() => this.switchMode()}>{this.state.mode}</button>
                 </div>
-                <p className="settingsText">game mode</p>
+                <p className="settingsText">mode</p>
                 <div>
                     <button className="btn" onClick={() => this.done()}>OK</button>
                 </div>

@@ -14,6 +14,11 @@
     color: white;
 }
 
+.seenText {
+    font-size: x-large;
+    font-weight: bold;
+}
+
 .submit {
     font-size: medium;
     color: #226CA7;
