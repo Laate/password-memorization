@@ -32,6 +32,7 @@ export default class StartView extends React.Component {
                 delay: 2,
                 chunkSize: 3,
                 repetitions: 1,
+                tries: 3,
                 mode: "normal"
             })
         }

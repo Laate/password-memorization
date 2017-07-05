@@ -25,6 +25,7 @@ export default class ChunkApp extends React.Component {
                                           seen={chunks.slice(0, i)}
                                           time={settings.time * 1000}
                                           delay={settings.delay * 1000}
+                                          tries={settings.tries}
                                           mode={settings.mode}
                                           onComplete={this.changeView}/>)
             }

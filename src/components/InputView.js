@@ -26,11 +26,11 @@ export default class InputView extends React.Component {
             this.props.onComplete()
         } else {
             const tries = this.state.tries + 1;
-            if (tries > 2) {
+            if (tries >= this.props.tries) {
                 this.props.onFail()
             } else {
                 this.setState({tries: tries});
-                alert(`Wrong, try again.\n${tries}/3 tries`)
+                alert(`Wrong, try again.\n${tries}/${this.props.tries} tries`)
             }
         }
     };

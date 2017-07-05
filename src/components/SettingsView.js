@@ -36,6 +36,8 @@ export default class SettingsView extends React.Component {
                 return typeof(value) === 'number' && value > 0 && parseInt(value, 10) === value;
             case "repetitions":
                 return typeof(value) === 'number' && value > 0 && parseInt(value, 10) === value;
+            case "tries":
+                return typeof(value) === 'number' && value > 0 && parseInt(value, 10) === value;
             case "mode":
                 return value === "normal" || value === "sequential";
             default:
@@ -80,6 +82,7 @@ export default class SettingsView extends React.Component {
                 {this.settingsField("delay")}
                 {this.settingsField("chunkSize")}
                 {this.settingsField("repetitions")}
+                {this.settingsField("tries")}
                 <div>
                     <button className="modeButton" onClick={() => this.switchMode()}>{this.state.mode}</button>
                 </div>

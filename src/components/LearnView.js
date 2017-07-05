@@ -29,13 +29,14 @@ export default class LearnView extends React.Component {
     render() {
         return this.state.showChunk ?
             <ChunkView chunk={this.props.chunk}
-                       onComplete={this.hideChunk}
                        time={this.props.time}
                        delay={this.props.delay}
-                       mode={this.props.mode}/>
+                       mode={this.props.mode}
+                       onComplete={this.hideChunk}/>
             :
             <InputView chunk={this.props.chunk}
                        seen={this.props.seen}
+                       tries={this.props.tries}
                        mode={this.props.mode}
                        onComplete={this.complete}
                        onFail={this.reset}/>
