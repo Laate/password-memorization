@@ -17,9 +17,8 @@ export default class ChunkApp extends React.Component {
         const chunks = settings.mode === "normal" ?
                 getChunks(word, settings.chunkSize) :
                 getChunksSequential(word, settings.chunkSize);
-
+        
         for (let i = 0; i < chunks.length; i++) {
-            console.log("Chunk " + i + " = " + JSON.stringify(chunks[i]));
             for (let j = 0; j < settings.repetitions; j++) {
                 viewQueue.push(<LearnView chunk={chunks[i]}
                                           seen={chunks.slice(0, i)}
