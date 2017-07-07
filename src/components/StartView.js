@@ -21,20 +21,25 @@ export default class StartView extends React.Component {
     // TODO error checking
     getSettings = () => {
         const savedSettings = JSON.parse(localStorage.getItem("settings"));
+        const defaultSettings = Object.freeze({
+            time: 3,
+            delay: 2,
+            chunkSize: 3,
+            repetitions: 1,
+            tries: 3,
+            mode: "normal"
+        });
+        const savedKeys = Object.keys(savedSettings).sort();
+        const defaultKeys = Object.keys(defaultSettings).sort();
 
-        if (savedSettings) {
+
+        // Validate that the saved settings make sense by comparing keys. Doesn't help if the fields contain
+        // nonsensical values, but the values are checked when saving.
+        if (savedSettings && JSON.stringify(savedKeys) === JSON.stringify(defaultKeys)) {
             console.log("Loaded settings from localStorage");
             return savedSettings
         } else {
-            // Default settings
-            return Object.freeze({
-                time: 3,
-                delay: 2,
-                chunkSize: 3,
-                repetitions: 1,
-                tries: 3,
-                mode: "normal"
-            })
+            return defaultSettings
         }
     };
 
