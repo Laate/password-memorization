@@ -29,16 +29,15 @@ export default class StartView extends React.Component {
             tries: 3,
             mode: "normal"
         });
-        const savedKeys = Object.keys(savedSettings).sort();
-        const defaultKeys = Object.keys(defaultSettings).sort();
-
 
         // Validate that the saved settings make sense by comparing keys. Doesn't help if the fields contain
         // nonsensical values, but the values are checked when saving.
-        if (savedSettings && JSON.stringify(savedKeys) === JSON.stringify(defaultKeys)) {
+        if (savedSettings &&
+            JSON.stringify(Object.keys(savedSettings)) === JSON.stringify(Object.keys(defaultSettings))) {
             console.log("Loaded settings from localStorage");
             return savedSettings
         } else {
+            console.log("Loaded default settings");
             return defaultSettings
         }
     };
