@@ -10,7 +10,7 @@
   "devDependencies": {
     "react-scripts": "1.0.7"
   },
-  "homepage": "https://testgroop.gitlab.io/memo/",
+  "homepage": "https://testgroop.gitlab.io/memo-tree/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
