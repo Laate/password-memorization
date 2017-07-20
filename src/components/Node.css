@@ -1,0 +1,13 @@
+.nodeText {
+    text-anchor: middle;
+    font-size: x-large;
+    fill: white;
+}
+
+.questionMark {
+    text-anchor: middle;
+    font-size: x-large;
+    font-weight: bold;
+    fill: #226CA7;
+    cursor: default;
+}

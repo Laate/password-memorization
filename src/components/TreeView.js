@@ -95,6 +95,7 @@ export default class TreeView extends React.Component {
                          y={node.y}
                          isActive={this.state.currentNode === node}
                          isCompleted={node.data.isCompleted}
+                         isLeaf={node.descendants().length === 1}
                          text={node.data.leftText + node.data.rightText}
                          handleClick={() => this.handleClick(node)}/>
         });
@@ -106,7 +107,7 @@ export default class TreeView extends React.Component {
 
         return (
             <div className="tree-container">
-                <svg height={this.props.height + 70} width={this.props.width}>
+                <svg height={this.props.height + 100} width={this.props.width}>
                     <g>
                         {links}
                         {nodes}
