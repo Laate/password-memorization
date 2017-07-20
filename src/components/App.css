@@ -20,6 +20,73 @@
     margin-right: auto;
 }
 
+.btn {
+    width: 5em;
+    height: 2em;
+    font-size: xx-large;
+    background-color: #2B87D1;
+    border: none;
+    outline: solid white;
+    color: white;
+    box-shadow: none;
+}
+
+.btn:hover {
+    font-size: xx-large;
+    background-color: white;
+    color: #2B87D1;
+}
+
+.fa-gear:hover {
+    color: white;
+}
+
+.fa-gear {
+    color: #226CA7;
+}
+
+.fa-spin-hover:hover {
+    -webkit-animation: fa-spin 6s infinite linear;
+    -moz-animation: fa-spin 6s infinite linear;
+    -o-animation: fa-spin 6s infinite linear;
+    animation: fa-spin 6s infinite linear;
+}
+
+.subtleText {
+    font-size: medium;
+    color: #226CA7;
+}
+
+.input {
+    text-align: center;
+    width: 30%;
+    height: 2em;
+    border: none;
+    outline: none;
+    font-size: x-large;
+    font-weight: bold;
+    background-color: #226CA7;
+    color: white;
+}
+
+.settingsButton {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input::placeholder {
+    color: #2B87D1;
+}
+
+
+
 body {
     background-color: #2B87D1;
 }

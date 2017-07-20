@@ -1,54 +1,49 @@
 import React from 'react';
 import './App.css';
-import StartView from './StartView'
-import LearnView from './LearnView'
-import FinishView from "./FinishView";
-import { getChunks, getChunksSequential } from '../modules/ChunkModule'
+import TreeView from './TreeView'
+import SettingsView from './SettingsView'
+import { getChunkTree } from '../modules/ChunkModule'
+
+
 
 
 export default class ChunkApp extends React.Component {
     constructor() {
         super();
-        this.state = {viewQueue: [<StartView start={this.start}/>]};
+
+        this.state = {
+            settings: this.getSettings(),
+            hideSettings: true
+        };
     }
 
-    initViewQueue = (word, settings) => {
-        const viewQueue = [];
-        const chunks = settings.mode === "normal" ?
-                getChunks(word, settings.chunkSize) :
-                getChunksSequential(word, settings.chunkSize);
-        
-        for (let i = 0; i < chunks.length; i++) {
-            for (let j = 0; j < settings.repetitions; j++) {
-                viewQueue.push(<LearnView chunk={chunks[i]}
-                                          seen={chunks.slice(0, i)}
-                                          time={settings.time * 1000}
-                                          delay={settings.delay * 1000}
-                                          tries={settings.tries}
-                                          mode={settings.mode}
-                                          onComplete={this.changeView}/>)
-            }
+    getSettings = () => {
+        const savedSettings = JSON.parse(localStorage.getItem("settings"));
+        const defaultSettings = Object.freeze({
+            chunkSize: 3,
+            wordLength: 28
+        });
+
+        // Comparing keys to validate the settings isn't foolproof since the fields can theoretically contain
+        // nonsensical values, but the values are checked when saving.
+        if (savedSettings &&
+            JSON.stringify(Object.keys(savedSettings)) === JSON.stringify(Object.keys(defaultSettings))) {
+            console.log("Loaded settings from localStorage");
+            return savedSettings
+        } else {
+            console.log("Loaded default settings");
+            return defaultSettings
         }
-        viewQueue.push(<FinishView reset={this.reset}/>);
-
-        return viewQueue
     };
 
-    start = (word, settings) => {
-        console.log("Starting with settings: " + JSON.stringify(settings));
-        this.setState({viewQueue: this.initViewQueue(word, settings)});
+    showSettings = () => {
+        this.setState({hideSettings: false})
     };
 
-    changeView = () => {
-        const newQueue = this.state.viewQueue.slice(1);
+    updateSettings = (newSettings) => {
         this.setState({
-            viewQueue: newQueue
-        })
-    };
-
-    reset = () => {
-        this.setState({
-            viewQueue: [<StartView start={this.start}/>]
+            settings: newSettings,
+            hideSettings: true
         })
     };
 
@@ -57,7 +52,13 @@ export default class ChunkApp extends React.Component {
             <div className="outer">
                 <div className="middle">
                     <div className="layout">
-                        {this.state.viewQueue[0]}
+                        <i className="settingsButton fa fa-gear fa-spin-hover" onClick={this.showSettings}></i>
+                        {this.state.hideSettings ?
+                            <TreeView className="tree"
+                                      width={1024}
+                                      height={350}
+                                      data={getChunkTree("abcdefghijklmn1234567890tail", this.state.settings.chunkSize)}/> :
+                            <SettingsView currentSettings={this.state.settings} updateSettings={this.updateSettings}/>}
                     </div>
                 </div>
             </div>

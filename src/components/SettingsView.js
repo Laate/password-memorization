@@ -1,5 +1,6 @@
 import React from 'react'
-import './SettingsView.css'
+import './App.css'
+
 
 export default class SettingsView extends React.Component {
     constructor(props) {
@@ -9,6 +10,7 @@ export default class SettingsView extends React.Component {
 
     set = (setting, event) => {
         const newSetting = parseFloat(event.target.value, 10);
+        console.log(newSetting);
         if (!isNaN(newSetting)) {
             this.setState({[setting]: newSetting})
         } else {
@@ -16,30 +18,13 @@ export default class SettingsView extends React.Component {
         }
     };
 
-    switchMode = () => {
-        if (this.state.mode === "normal") {
-            this.setState({mode: "sequential" })
-        } else if (this.state.mode === "sequential") {
-            this.setState({mode: "normal"})
-        } else {
-            console.error("unknown game mode " + this.state.mode)
-        }
-    };
 
     validate = (setting, value) => {
         switch (setting) {
-            case "time":
-                return typeof(value) === 'number' && value > 0;
-            case "delay":
-                return typeof(value) === 'number' && value >= 0;
             case "chunkSize":
                 return typeof(value) === 'number' && value > 0 && parseInt(value, 10) === value;
-            case "repetitions":
-                return typeof(value) === 'number' && value > 0 && parseInt(value, 10) === value;
-            case "tries":
-                return typeof(value) === 'number' && value > 0 && parseInt(value, 10) === value;
-            case "mode":
-                return value === "normal" || value === "sequential";
+            case "wordLength":
+                return typeof(value) === 'number' && value > 0 && value <= 100 && parseInt(value, 10) === value;
             default:
                 console.error("Couldn't validate unknown setting: " + setting);
                 return false
@@ -56,7 +41,7 @@ export default class SettingsView extends React.Component {
                        value={this.state[setting]}
                        placeholder={setting}
                        onChange={(event) => this.set(setting, event)}/>
-                <p className="settingsText">{setting}</p>
+                <p className="subtleText">{setting}</p>
             </div>;
         return settingsField
     };
@@ -78,15 +63,8 @@ export default class SettingsView extends React.Component {
         return (
             <div>
                 <p>Settings</p>
-                {this.settingsField("time")}
-                {this.settingsField("delay")}
                 {this.settingsField("chunkSize")}
-                {this.settingsField("repetitions")}
-                {this.settingsField("tries")}
-                <div>
-                    <button className="modeButton" onClick={() => this.switchMode()}>{this.state.mode}</button>
-                </div>
-                <p className="settingsText">mode</p>
+                {this.settingsField("wordLength")}
                 <div>
                     <button className="btn" onClick={() => this.done()}>OK</button>
                 </div>

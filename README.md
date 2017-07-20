@@ -19,11 +19,7 @@ Project configuration was bootstrapped using [Create React App](https://github.c
 
 ## The chunking algorithm 
 
-We split the word into atomic chunks of some size and make a binary tree structure out of them.    
+We split the word into atomic chunks of some size and make a binary tree structure out of them.
 Chunks are then shown in the order of a post-order traversal.
 
-![chunking algorithm](/img/chunking_algorithm.png)    
-      
-Below is an example of how the node A|B in the above image would look like with the word "abc123******" and chunk size set to three.
-    
-![UI example](/img/UI_example.png)
+![chunking algorithm](/img/chunking_algorithm.png)
