@@ -21,7 +21,7 @@ export default class SettingsView extends React.Component {
     validate = (setting, value) => {
         switch (setting) {
             case "chunkSize":
-                return typeof(value) === 'number' && value > 0 && parseInt(value, 10) === value;
+                return typeof(value) === 'number' && value > 0 && value <= 100 && parseInt(value, 10) === value;
             case "wordLength":
                 return typeof(value) === 'number' && value > 0 && value <= 100 && parseInt(value, 10) === value;
             default:
@@ -35,7 +35,8 @@ export default class SettingsView extends React.Component {
             <div>
                 <input type="number"
                        pattern="[0-9]*"
-                       min="0"
+                       min="1"
+                       max="100"
                        className="input"
                        value={this.state[setting]}
                        placeholder={setting}

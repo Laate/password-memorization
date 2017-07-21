@@ -81,6 +81,12 @@ input::-webkit-inner-spin-button {
     margin: 0;
 }
 
+input:invalid {
+    border: solid;
+    border-width: thin;
+    border-color: red;
+}
+
 input::placeholder {
     color: #2B87D1;
 }
