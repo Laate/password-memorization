@@ -39,12 +39,10 @@ export default class ChunkApp extends React.Component {
     getWord = () => {
         const savedWord = localStorage.getItem("word");
         if (savedWord && savedWord.length === this.state.settings.wordLength) {
-            console.log("loaded word from localStorage");
             return savedWord
         } else {
             const randWord = randomWord(this.state.settings.wordLength);
             localStorage.setItem("word", randWord);
-            console.log("generated new word to memorize");
             return randWord
         }
     };
