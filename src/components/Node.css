@@ -4,6 +4,10 @@
     fill: white;
 }
 
+.noselect {
+    user-select: none;
+}
+
 .questionMark {
     text-anchor: middle;
     font-size: x-large;

@@ -40,7 +40,7 @@ export default class Node extends React.Component {
                 <circle className="node" fill={this.getColor()} r={radius} onClick={this.handleClick}/>
                 {(this.props.isLeaf && this.props.isActive) ? <text y={0}
                                                                     dy=".35em"
-                                                                    className="questionMark"
+                                                                    className="questionMark noselect"
                                                                     onClick={this.handleClick}>?</text> : null}
                 {this.state.showText && <text y={radius + 14}
                                               dy=".35em"
