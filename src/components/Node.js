@@ -44,7 +44,7 @@ export default class Node extends React.Component {
                                                                     onClick={this.handleClick}>?</text> : null}
                 {this.state.showText && <text y={radius + 14}
                                               dy=".35em"
-                                              className="nodeText">{this.props.text}</text>}
+                                              className="nodeText noselect">{this.props.text}</text>}
             </g>
         );
     }
