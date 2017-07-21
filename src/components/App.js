@@ -47,8 +47,8 @@ export default class ChunkApp extends React.Component {
         }
     };
 
-    showSettings = () => {
-        this.setState({hideSettings: false})
+    toggleSettings = () => {
+        this.setState({hideSettings: !this.state.hideSettings})
     };
 
     updateSettings = (newSettings) => {
@@ -63,7 +63,7 @@ export default class ChunkApp extends React.Component {
             <div className="outer">
                 <div className="middle">
                     <div className="layout">
-                        <i className="settingsButton fa fa-gear fa-spin-hover" onClick={this.showSettings}></i>
+                        <i className="settingsButton fa fa-gear fa-spin-hover" onClick={this.toggleSettings}></i>
                         {this.state.hideSettings ?
                             <TreeView className="tree"
                                       width={1024}
