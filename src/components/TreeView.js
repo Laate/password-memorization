@@ -43,15 +43,6 @@ export default class TreeView extends React.Component {
         return next
     };
 
-    // FOR DEBUGGING ONLY
-    handleClick = (node) => {
-        const children = node.descendants();
-        for (let i = 0; i < children.length; i++) {
-            children[i].data.isCompleted = true
-        }
-        this.setState({currentNode: node});
-    };
-
     handleChange = (event) => {
         this.setState({input: event.target.value});
     };
@@ -96,8 +87,7 @@ export default class TreeView extends React.Component {
                          isActive={this.state.currentNode === node}
                          isCompleted={node.data.isCompleted}
                          isLeaf={node.descendants().length === 1}
-                         text={node.data.leftText + node.data.rightText}
-                         handleClick={() => this.handleClick(node)}/>
+                         text={node.data.leftText + node.data.rightText}/>
         });
 
         const links = this.linkList.map(link => {
