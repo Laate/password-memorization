@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import TreeView from './TreeView'
 import SettingsView from './SettingsView'
-import { getChunkTree } from '../modules/ChunkModule'
+import { chunkTree, randomWord } from '../modules/ChunkModule'
 
 
 
@@ -36,6 +36,19 @@ export default class ChunkApp extends React.Component {
         }
     };
 
+    getWord = () => {
+        const savedWord = localStorage.getItem("word");
+        if (savedWord && savedWord.length === this.state.settings.wordLength) {
+            console.log("loaded word from localStorage");
+            return savedWord
+        } else {
+            const randWord = randomWord(this.state.settings.wordLength);
+            localStorage.setItem("word", randWord);
+            console.log("generated new word to memorize");
+            return randWord
+        }
+    };
+
     showSettings = () => {
         this.setState({hideSettings: false})
     };
@@ -57,7 +70,7 @@ export default class ChunkApp extends React.Component {
                             <TreeView className="tree"
                                       width={1024}
                                       height={350}
-                                      data={getChunkTree("abcdefghijklmn1234567890tail", this.state.settings.chunkSize)}/> :
+                                      data={chunkTree(this.getWord(), this.state.settings.chunkSize)}/> :
                             <SettingsView currentSettings={this.state.settings} updateSettings={this.updateSettings}/>}
                     </div>
                 </div>

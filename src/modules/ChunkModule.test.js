@@ -1,9 +1,9 @@
-import { getChunkTree } from './ChunkModule'
+import { chunkTree } from './ChunkModule'
 
-test('getChunkTree with chunks of one', () => {
-    expect(getChunkTree("a", 1)).toEqual({"leftText":"a","rightText":""});
+test('chunkTree with chunks of one', () => {
+    expect(chunkTree("a", 1)).toEqual({"leftText":"a","rightText":""});
 
-    expect(getChunkTree("abc", 1)).toEqual({
+    expect(chunkTree("abc", 1)).toEqual({
         "leftText":"ab",
         "rightText":"c",
         "left":[{
@@ -19,7 +19,7 @@ test('getChunkTree with chunks of one', () => {
             "leftText":"c",
             "rightText":""}]});
 
-    expect(getChunkTree("abcdef", 1)).toEqual({
+    expect(chunkTree("abcdef", 1)).toEqual({
         "leftText":"abc",
         "rightText":"def",
         "left":[{
@@ -54,10 +54,10 @@ test('getChunkTree with chunks of one', () => {
                 "rightText":""}]}]})
 });
 
-test('getChunkTree with chunks of three', () => {
-    expect(getChunkTree("abc", 3)).toEqual({"leftText":"abc","rightText":""});
+test('chunkTree with chunks of three', () => {
+    expect(chunkTree("abc", 3)).toEqual({"leftText":"abc","rightText":""});
 
-    expect(getChunkTree("abcdef", 3)).toEqual({
+    expect(chunkTree("abcdef", 3)).toEqual({
         "leftText":"abc",
         "rightText":"def",
         "left":[{
@@ -67,7 +67,7 @@ test('getChunkTree with chunks of three', () => {
             "leftText":"def",
             "rightText":""}]});
 
-    expect(getChunkTree("1234567890", 3)).toEqual({
+    expect(chunkTree("1234567890", 3)).toEqual({
         "leftText":"123456",
         "rightText":"7890",
         "left":[{

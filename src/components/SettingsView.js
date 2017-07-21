@@ -64,6 +64,7 @@ export default class SettingsView extends React.Component {
             <div>
                 <p>Settings</p>
                 {this.settingsField("chunkSize")}
+                <text className="subtleText">NOTE: changing wordLength will generate a new word</text>
                 {this.settingsField("wordLength")}
                 <div>
                     <button className="btn" onClick={() => this.done()}>OK</button>

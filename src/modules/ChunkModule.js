@@ -1,5 +1,5 @@
 
-export function getChunkTree(word, chunkSize=3) {
+export function chunkTree(word, chunkSize=3) {
     if (word.length < chunkSize * 2) {
         return {
             leftText: word,
@@ -15,7 +15,16 @@ export function getChunkTree(word, chunkSize=3) {
     return {
         leftText: left,
         rightText: right,
-        left: [getChunkTree(left, chunkSize)],
-        right: [getChunkTree(right, chunkSize)]
+        left: [chunkTree(left, chunkSize)],
+        right: [chunkTree(right, chunkSize)]
     }
+}
+
+export function randomWord(length) {
+    const possible = "abcdefghijklmnopqrstuvwxyz0123456789";
+    let res = "";
+    for (let i = 0; i < length; i++) {
+        res += possible.charAt(Math.floor(Math.random() * possible.length))
+    }
+    return res
 }
