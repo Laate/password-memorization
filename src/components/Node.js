@@ -10,7 +10,7 @@ export default class Node extends React.Component {
     }
 
     handleClick = () => {
-        if (this.props.isActive && this.props.isLeaf) {
+        if (this.props.isActive && this.props.isLeaf && !this.state.showText) {
             this.setState({showText: true});
             setTimeout(() => {
                 this.setState({showText: false})
@@ -33,13 +33,12 @@ export default class Node extends React.Component {
 
         return (
             <g transform={`translate(${this.props.x}, ${this.props.y})`}>
-
                 <circle className="node" fill={this.getColor()} r={radius} onClick={this.handleClick}/>
                 {(this.props.isLeaf && this.props.isActive) ? <text y={0}
                                                                     dy=".35em"
                                                                     className="questionMark"
                                                                     onClick={this.handleClick}>?</text> : null}
-                {this.state.showText && <text y={radius + 13}
+                {this.state.showText && <text y={radius + 14}
                                               dy=".35em"
                                               className="nodeText">{this.props.text}</text>}
             </g>

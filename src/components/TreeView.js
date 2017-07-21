@@ -90,7 +90,7 @@ export default class TreeView extends React.Component {
     render() {
         const nodes = this.nodeList.map(node => {
             return <Node key={`${node.x}, ${node.y}`}
-                         radius={15}
+                         radius={18}
                          x={node.x}
                          y={node.y}
                          isActive={this.state.currentNode === node}
@@ -121,7 +121,7 @@ export default class TreeView extends React.Component {
                                onChange={this.handleChange}
                                autoFocus/>
                     </label>
-                    <div className="subtleText">press enter to submit</div>
+                    <div className="subtleText">What is the current chunk?</div>
                 </form>
             </div>
         );
