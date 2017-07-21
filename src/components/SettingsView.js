@@ -10,7 +10,6 @@ export default class SettingsView extends React.Component {
 
     set = (setting, event) => {
         const newSetting = parseFloat(event.target.value, 10);
-        console.log(newSetting);
         if (!isNaN(newSetting)) {
             this.setState({[setting]: newSetting})
         } else {

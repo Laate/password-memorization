@@ -9,10 +9,14 @@ export default class Node extends React.Component {
         this.state = {showText: false};
     }
 
+    componentWillUnmount() {
+        clearTimeout(this.textTimer);
+    }
+
     handleClick = () => {
         if (this.props.isActive && this.props.isLeaf && !this.state.showText) {
             this.setState({showText: true});
-            setTimeout(() => {
+            this.textTimer = setTimeout(() => {
                 this.setState({showText: false})
             }, 2000)
         }
