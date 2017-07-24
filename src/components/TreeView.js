@@ -44,7 +44,14 @@ export default class TreeView extends React.Component {
     };
 
     handleChange = (event) => {
-        this.setState({input: event.target.value});
+        event.persist();
+        const newInput = event.target.value;
+        const currData = this.state.currentNode.data;
+        this.setState({input: newInput}, () => {
+            if (newInput.length === currData.leftText.length + currData.rightText.length) {
+                this.handleSubmit(event)
+            }
+        });
     };
 
     handleSubmit = (event) => {
