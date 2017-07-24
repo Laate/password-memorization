@@ -84,8 +84,18 @@ export default class TreeView extends React.Component {
         this.setState({input: ""})
     };
 
+    reset = () => {
+        const nodes = this.root.descendants();
+        for (let i = 0; i < nodes.length; i++) {
+            nodes[i].data.isCompleted = false;
+            nodes[i].data.isSeen = false;
+        }
+        this.setState({currentNode: this.root.leaves()[0]})
+    };
+
     done = () => {
-        alert("done")
+        alert("Memorization completed!");
+        this.reset();
     };
 
     render() {
