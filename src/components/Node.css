@@ -8,11 +8,3 @@
 .noselect {
     user-select: none;
 }
-
-.questionMark {
-    text-anchor: middle;
-    font-size: x-large;
-    font-weight: bold;
-    fill: #226CA7;
-    cursor: default;
-}

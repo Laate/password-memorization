@@ -65,6 +65,7 @@ export default class TreeView extends React.Component {
 
         if (input === leftText + rightText) {
             currNode.data.isCompleted = true;
+            currNode.data.isSeen = true;
             this.setState({currentNode: this.getNext(currNode)});
             currNode.parent || this.done();
         } else if (rightNode && input.indexOf(leftText) === 0) {
@@ -77,8 +78,10 @@ export default class TreeView extends React.Component {
             rightNode.data.isCompleted = false;
             leftNode.data.isCompleted = false;
             this.setState({currentNode: leftNode})
+        } else {
+            currNode.data.isSeen = false
         }
-        this.setState({input: ''})
+        this.setState({input: ""})
     };
 
     done = () => {
@@ -94,6 +97,7 @@ export default class TreeView extends React.Component {
                          isActive={this.state.currentNode === node}
                          isCompleted={node.data.isCompleted}
                          isLeaf={node.descendants().length === 1}
+                         isSeen={node.data.isSeen}
                          text={node.data.leftText + node.data.rightText}/>
         });
 
