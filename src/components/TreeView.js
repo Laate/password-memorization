@@ -3,6 +3,7 @@ import './App.css'
 import Node from './Node'
 import Link from './Link'
 import { tree, hierarchy } from 'd3-hierarchy';
+import { send } from '../modules/Logging';
 
 
 export default class TreeView extends React.Component {
@@ -15,12 +16,21 @@ export default class TreeView extends React.Component {
         this.nodeList.forEach(node => {
             node.y += 30
         });
+        this.setNodeIDs();
 
         this.state = {
             currentNode: this.root.leaves()[0],
             input: ""
         };
     }
+
+    // Node's ID is its position in a post-order traversal
+    setNodeIDs = () => {
+        let i = 0;
+        this.root.eachAfter((node) => {
+            node.data.id = i++
+        })
+    };
 
     getChildren = (node) => {
         const res = [];
@@ -59,10 +69,18 @@ export default class TreeView extends React.Component {
         const rightNode = currNode.descendants()[2];
         const leftNode = currNode.descendants()[1];
         const input = this.state.input;
+        const logData = {
+            text: currNode.data.text,
+            input,
+            nodeID: currNode.data.id,
+            fullWord: this.root.data.text,
+            isCorrect: false
+        };
 
         if (input === currNode.data.text) {
             currNode.data.isCompleted = true;
             currNode.data.isSeen = true;
+            logData.isCorrect  = true;
             this.setState({currentNode: this.getNext(currNode)});
             currNode.parent || this.done();
         } else if (!(leftNode && rightNode)) {
@@ -78,6 +96,7 @@ export default class TreeView extends React.Component {
             leftNode.data.isCompleted = false;
             this.setState({currentNode: leftNode})
         }
+        send("guess", logData);
         this.setState({input: ""})
     };
 
