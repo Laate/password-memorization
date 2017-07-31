@@ -1,16 +1,16 @@
 
-export function chunkTree(word, chunkSize) {
-    if (word.length < chunkSize * 2) {
-        return { text: word }
+export function chunkTree(text, chunkSize) {
+    if (text.length < chunkSize * 2) {
+        return { text }
     }
 
-    const nofChunks = Math.floor(word.length / chunkSize);
+    const nofChunks = Math.floor(text.length / chunkSize);
     const mid = (Math.floor(nofChunks / 2) + (nofChunks % 2)) * chunkSize;
 
     return {
-        text: word,
-        left: [chunkTree(word.slice(0, mid), chunkSize)],
-        right: [chunkTree(word.slice(mid), chunkSize)]
+        text,
+        left: [chunkTree(text.slice(0, mid), chunkSize)],
+        right: [chunkTree(text.slice(mid), chunkSize)]
     }
 }
 
