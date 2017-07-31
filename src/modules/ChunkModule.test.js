@@ -1,86 +1,64 @@
 import { chunkTree } from './ChunkModule'
 
 test('chunkTree with chunks of one', () => {
-    expect(chunkTree("a", 1)).toEqual({"leftText":"a","rightText":""});
+    expect(chunkTree("", 1)).toEqual({"text":""});
+
+    expect(chunkTree("a", 1)).toEqual({"text":"a"});
 
     expect(chunkTree("abc", 1)).toEqual({
-        "leftText":"ab",
-        "rightText":"c",
+        "text":"abc",
         "left":[{
-            "leftText":"a",
-            "rightText":"b",
+            "text":"ab",
             "left":[{
-                "leftText":"a",
-                "rightText":""}],
+                "text":"a"}],
             "right":[{
-                "leftText":"b",
-                "rightText":""}]}],
+                "text":"b"}]}],
         "right":[{
-            "leftText":"c",
-            "rightText":""}]});
+            "text":"c"}]});
 
     expect(chunkTree("abcdef", 1)).toEqual({
-        "leftText":"abc",
-        "rightText":"def",
+        "text":"abcdef",
         "left":[{
-            "leftText":"ab",
-            "rightText":"c",
+            "text":"abc",
             "left":[{
-                "leftText":"a",
-                "rightText":"b",
+                "text":"ab",
                 "left":[{
-                    "leftText":"a",
-                    "rightText":""}],
+                    "text":"a"}],
                 "right":[{
-                    "leftText":"b",
-                    "rightText":""}]}],
+                    "text":"b"}]}],
             "right":[{
-                "leftText":"c",
-                "rightText":""}]}],
+                "text":"c"}]}],
         "right":[{
-            "leftText":"de",
-            "rightText":"f",
+            "text":"def",
             "left":[{
-                "leftText":"d",
-                "rightText":"e",
+                "text":"de",
                 "left":[{
-                    "leftText":"d",
-                    "rightText":""}],
+                    "text":"d"}],
                 "right":[{
-                    "leftText":"e",
-                    "rightText":""}]}],
+                    "text":"e"}]}],
             "right":[{
-                "leftText":"f",
-                "rightText":""}]}]})
+                "text":"f"}]}]});
 });
 
 test('chunkTree with chunks of three', () => {
-    expect(chunkTree("abc", 3)).toEqual({"leftText":"abc","rightText":""});
+    expect(chunkTree("abc", 3)).toEqual({"text":"abc"});
 
     expect(chunkTree("abcdef", 3)).toEqual({
-        "leftText":"abc",
-        "rightText":"def",
+        "text":"abcdef",
         "left":[{
-            "leftText":"abc",
-            "rightText":""}],
+            "text":"abc"}],
         "right":[{
-            "leftText":"def",
-            "rightText":""}]});
+            "text":"def"}]});
 
     expect(chunkTree("1234567890", 3)).toEqual({
-        "leftText":"123456",
-        "rightText":"7890",
+        "text":"1234567890",
         "left":[{
-            "leftText":"123",
-            "rightText":"456",
+            "text":"123456",
             "left":[{
-                "leftText":"123",
-                "rightText":""}],
+                "text":"123"}],
             "right":[{
-                "leftText":"456",
-                "rightText":""}]}],
+                "text":"456"}]}],
         "right":[{
-            "leftText":"7890",
-            "rightText":""}]})
+            "text":"7890"}]})
 });
 
