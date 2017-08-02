@@ -3,7 +3,7 @@ import './App.css'
 import Node from './Node'
 import Link from './Link'
 import { tree, hierarchy } from 'd3-hierarchy';
-import { send } from '../modules/Logging';
+import { sendGuess } from '../modules/Logging';
 
 
 export default class TreeView extends React.Component {
@@ -70,16 +70,20 @@ export default class TreeView extends React.Component {
         const leftNode = currNode.descendants()[1];
         const input = this.state.input;
         const logData = {
-            text: currNode.data.text,
-            input,
             nodeID: currNode.data.id,
-            fullWord: this.root.data.text,
+            input,
+            nodeText: currNode.data.text,
+            fullText: this.root.data.text,
+            isLeftCorrect: false,
+            isRightCorrect: false,
             isCorrect: false
         };
 
         if (input === currNode.data.text) {
             currNode.data.isCompleted = true;
             currNode.data.isSeen = true;
+            logData.isLeftCorrect = true;
+            logData.isRightCorrect = true;
             logData.isCorrect  = true;
             this.setState({currentNode: this.getNext(currNode)});
             currNode.parent || this.done();
@@ -87,16 +91,18 @@ export default class TreeView extends React.Component {
             currNode.data.isSeen = false
         } else if (input.indexOf(leftNode.data.text) === 0) {
             rightNode.data.isCompleted = false;
+            logData.isLeftCorrect = true;
             this.setState({currentNode: rightNode})
-        } else if (input.lastIndexOf(rightNode.data.text) === input.length - rightNode.data.text) {
+        } else if (input.lastIndexOf(rightNode.data.text) === input.length - rightNode.data.text.length) {
             leftNode.data.isCompleted = false;
+            logData.isRightCorrect = true;
             this.setState({currentNode: leftNode});
         } else {
             rightNode.data.isCompleted = false;
             leftNode.data.isCompleted = false;
             this.setState({currentNode: leftNode})
         }
-        send("guess", logData);
+        sendGuess(logData);
         this.setState({input: ""})
     };
 

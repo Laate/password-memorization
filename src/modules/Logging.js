@@ -22,8 +22,8 @@ function getSessionID() {
 }
 
 // Maybe we should retry / exponential backoff on error?
-export function send(eventType, data={}) {
-    fetch(api + "/event", {
+export function sendGuess(data) {
+    fetch(api + "/guess", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -31,8 +31,7 @@ export function send(eventType, data={}) {
         body: JSON.stringify({
             userID: getUserID(),
             sessionID: getSessionID(),
-            eventType,
-            data
+            ...data
         })
     }).then((response) => {
         if (!response.ok) {
