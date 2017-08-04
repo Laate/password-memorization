@@ -1,7 +1,7 @@
 import 'whatwg-fetch'
 import { randomWord } from './ChunkModule'
 
-const api = "http://localhost:5000/api";
+const api = "https://memo.cs.aalto.fi/api";
 
 function getUserID() {
     if (localStorage.getItem("userID")) {
