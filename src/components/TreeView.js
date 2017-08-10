@@ -114,6 +114,8 @@ export default class TreeView extends React.Component {
     };
 
     done = () => {
+        const memCount =  parseInt(localStorage.getItem("memorisedCount"), 10) || 0;
+        localStorage.setItem("memorisedCount", memCount + 1);
         alert("Memorization completed!");
         this.reset();
     };

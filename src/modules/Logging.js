@@ -21,8 +21,12 @@ function getSessionID() {
     return sessionID
 }
 
+function getMemoCount() {
+    return parseInt(localStorage.getItem("memorisedCount"), 10) || 0;
+}
+
 // Maybe we should retry / exponential backoff on error?
-export function sendGuess(data) {
+export function sendGuess(guessData) {
     fetch(api + "/guess", {
         method: "POST",
         headers: {
@@ -31,7 +35,8 @@ export function sendGuess(data) {
         body: JSON.stringify({
             userID: getUserID(),
             sessionID: getSessionID(),
-            ...data
+            memorisedCount: getMemoCount(),
+            ...guessData
         })
     }).then((response) => {
         if (!response.ok) {

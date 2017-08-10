@@ -43,6 +43,7 @@ export default class ChunkApp extends React.Component {
         } else {
             const randWord = randomWord(this.state.settings.wordLength);
             localStorage.setItem("word", randWord);
+            localStorage.setItem("memorisedCount", 0);
             return randWord
         }
     };
