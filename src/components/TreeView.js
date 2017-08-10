@@ -75,8 +75,7 @@ export default class TreeView extends React.Component {
             nodeText: currNode.data.text,
             fullText: this.root.data.text,
             isLeftCorrect: false,
-            isRightCorrect: false,
-            isCorrect: false
+            isRightCorrect: false
         };
 
         if (input === currNode.data.text) {
@@ -84,7 +83,6 @@ export default class TreeView extends React.Component {
             currNode.data.isSeen = true;
             logData.isLeftCorrect = true;
             logData.isRightCorrect = true;
-            logData.isCorrect  = true;
             this.setState({currentNode: this.getNext(currNode)});
             currNode.parent || this.done();
         } else if (!(leftNode && rightNode)) {
