@@ -84,7 +84,6 @@ export default class TreeView extends React.Component {
             logData.isLeftCorrect = true;
             logData.isRightCorrect = true;
             this.setState({currentNode: this.getNext(currNode)});
-            currNode.parent || this.done();
         } else if (!(leftNode && rightNode)) {
             currNode.data.isSeen = false
         } else if (input.indexOf(leftNode.data.text) === 0) {
@@ -101,7 +100,10 @@ export default class TreeView extends React.Component {
             this.setState({currentNode: leftNode})
         }
         sendGuess(logData);
-        this.setState({input: ""})
+        this.setState({input: ""});
+        if (input === currNode.data.text && !currNode.parent) {
+            this.done();
+        }
     };
 
     reset = () => {
