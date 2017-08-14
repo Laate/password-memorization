@@ -86,11 +86,11 @@ export default class TreeView extends React.Component {
             this.setState({currentNode: this.getNext(currNode)});
         } else if (!(leftNode && rightNode)) {
             currNode.data.isSeen = false
-        } else if (input.indexOf(leftNode.data.text) === 0) {
+        } else if (input.startsWith(leftNode.data.text)) {
             rightNode.data.isCompleted = false;
             logData.isLeftCorrect = true;
             this.setState({currentNode: rightNode})
-        } else if (input.lastIndexOf(rightNode.data.text) === input.length - rightNode.data.text.length) {
+        } else if (input.endsWith(rightNode.data.text)) {
             leftNode.data.isCompleted = false;
             logData.isRightCorrect = true;
             this.setState({currentNode: leftNode});
