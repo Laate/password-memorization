@@ -1,10 +1,17 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import './App.css'
 import Node from './Node'
 import Link from './Link'
 import { tree, hierarchy } from 'd3-hierarchy';
 import { sendGuess } from '../modules/Logging';
 
+
+const treeViewProps = {
+    width: PropTypes.number.isRequired,
+    height: PropTypes.number.isRequired,
+    data: PropTypes.object.isRequired
+};
 
 export default class TreeView extends React.Component {
     constructor(props) {
@@ -169,3 +176,5 @@ export default class TreeView extends React.Component {
         );
     }
 }
+
+TreeView.propTypes = treeViewProps;

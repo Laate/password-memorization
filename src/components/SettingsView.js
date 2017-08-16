@@ -1,6 +1,15 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import './App.css'
 
+
+const settingsViewProps = {
+    currentSettings: PropTypes.shape({
+        chunkSize: PropTypes.number,
+        wordLength: PropTypes.number
+    }).isRequired,
+    updateSettings: PropTypes.func.isRequired
+};
 
 export default class SettingsView extends React.Component {
     constructor(props) {
@@ -8,6 +17,7 @@ export default class SettingsView extends React.Component {
         this.state = this.props.currentSettings
     }
 
+    // Assumes that settings have numeric values
     set = (setting, event) => {
         const newSetting = parseFloat(event.target.value, 10);
         if (!isNaN(newSetting)) {
@@ -16,7 +26,6 @@ export default class SettingsView extends React.Component {
             this.setState({[setting]: ""})
         }
     };
-
 
     validate = (setting, value) => {
         switch (setting) {
@@ -72,5 +81,6 @@ export default class SettingsView extends React.Component {
             </div>
         );
     }
-
 }
+
+SettingsView.propTypes = settingsViewProps;

@@ -1,6 +1,18 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import './Node.css'
 
+
+const nodeProps = {
+    text: PropTypes.string.isRequired,
+    x: PropTypes.number.isRequired,
+    y: PropTypes.number.isRequired,
+    radius: PropTypes.number.isRequired,
+    isActive: PropTypes.bool.isRequired,
+    isCompleted: PropTypes.bool.isRequired,
+    isLeaf: PropTypes.bool.isRequired,
+    isSeen: PropTypes.bool.isRequired
+};
 
 export default class Node extends React.Component {
 
@@ -27,5 +39,6 @@ export default class Node extends React.Component {
             </g>
         );
     }
-
 }
+
+Node.propTypes = nodeProps;

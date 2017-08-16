@@ -5,8 +5,6 @@ import SettingsView from './SettingsView'
 import { chunkTree, randomWord } from '../modules/ChunkModule'
 
 
-
-
 export default class ChunkApp extends React.Component {
     constructor() {
         super();

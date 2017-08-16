@@ -1,5 +1,13 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
+
+const linkProps = {
+    x1: PropTypes.number.isRequired,
+    y1: PropTypes.number.isRequired,
+    x2: PropTypes.number.isRequired,
+    y2: PropTypes.number.isRequired,
+};
 
 export default class Link extends React.Component {
     constructor(props) {
@@ -18,5 +26,6 @@ export default class Link extends React.Component {
                      stroke="#226CA7"
                      fill="transparent"/>
     }
-
 }
+
+Link.propTypes = linkProps;
