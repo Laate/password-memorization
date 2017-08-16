@@ -140,7 +140,11 @@ export default class TreeView extends React.Component {
 
         const links = this.linkList.map(link => {
             const key = `${link.source.x}, ${link.source.y}, ${link.target.x}, ${link.target.y}`;
-            return <Link key={key} source={link.source} target={link.target}/>
+            return <Link key={key}
+                         x1={link.source.x}
+                         y1={link.source.y}
+                         x2={link.target.x}
+                         y2={link.target.y}/>
         });
 
         return (
