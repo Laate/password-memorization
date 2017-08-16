@@ -13,10 +13,7 @@ export default class TreeView extends React.Component {
         this.root =  tree().size([this.props.width, this.props.height])(hierarchy(this.props.data, this.getChildren));
         this.nodeList = this.root.descendants();
         this.linkList = this.root.links();
-        this.nodeList.forEach(node => {
-            node.y += 30
-        });
-        this.setNodeIDs();
+        this.initNodes();
 
         this.state = {
             currentNode: this.root.leaves()[0],
@@ -24,11 +21,17 @@ export default class TreeView extends React.Component {
         };
     }
 
-    // Node's ID is its position in a post-order traversal
-    setNodeIDs = () => {
+    // Adding a small margin to nodes, otherwise top node will be cut off.
+    // Setting isSeen to keep track if we need to show the hint text.
+    // Setting isCompleted for coloring and knowing which node to move to.
+    // Setting id as the node's position in a post-order traversal, used for data logging purposes.
+    initNodes = () => {
         let i = 0;
         this.root.eachAfter((node) => {
-            node.data.id = i++
+            node.y += 30;
+            node.data.isSeen = false;
+            node.data.isCompleted = false;
+            node.data.id = i++;
         })
     };
 
