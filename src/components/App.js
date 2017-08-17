@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import TreeView from './TreeView'
 import SettingsView from './SettingsView'
-import { chunkTree, randomWord } from '../modules/ChunkModule'
+import { randomWord } from '../modules/ChunkModule'
 
 
 export default class ChunkApp extends React.Component {
@@ -68,7 +68,8 @@ export default class ChunkApp extends React.Component {
                             <TreeView className="tree"
                                       width={1024}
                                       height={350}
-                                      data={chunkTree(this.getWord(), this.state.settings.chunkSize)}/> :
+                                      word={this.getWord()}
+                                      chunkSize={this.state.settings.chunkSize}/> :
                             <SettingsView currentSettings={this.state.settings} updateSettings={this.updateSettings}/>}
                     </div>
                 </div>

@@ -4,20 +4,24 @@ import './App.css'
 import Node from './Node'
 import Link from './Link'
 import { tree, hierarchy } from 'd3-hierarchy';
+import { chunkTree } from '../modules/ChunkModule';
 import { sendGuess } from '../modules/Logging';
+
 
 
 const treeViewProps = {
     width: PropTypes.number.isRequired,
     height: PropTypes.number.isRequired,
-    data: PropTypes.object.isRequired
+    word: PropTypes.string.isRequired,
+    chunkSize: PropTypes.number.isRequired
 };
 
 export default class TreeView extends React.Component {
     constructor(props) {
         super(props);
 
-        this.root =  tree().size([this.props.width, this.props.height])(hierarchy(this.props.data, this.getChildren));
+        const data = chunkTree(this.props.word, this.props.chunkSize);
+        this.root =  tree().size([this.props.width, this.props.height])(hierarchy(data, this.getChildren));
         this.nodeList = this.root.descendants();
         this.linkList = this.root.links();
         this.initNodes();
