@@ -63,8 +63,6 @@ export default class SettingsView extends React.Component {
                 return;
             }
         }
-        // TODO localStorage might not be available
-        localStorage.setItem("settings", JSON.stringify(this.state));
         this.props.updateSettings(this.state);
     };
 

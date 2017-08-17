@@ -51,6 +51,7 @@ export default class ChunkApp extends React.Component {
     };
 
     updateSettings = (newSettings) => {
+        localStorage.setItem("settings", JSON.stringify(newSettings));
         this.setState({
             settings: newSettings,
             hideSettings: true
