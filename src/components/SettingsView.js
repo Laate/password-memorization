@@ -14,20 +14,22 @@ const settingsViewProps = {
 export default class SettingsView extends React.Component {
     constructor(props) {
         super(props);
-        this.state = this.props.currentSettings
+        this.state = { settings: this.props.currentSettings }
     }
 
     // Assumes that settings have numeric values
     set = (setting, event) => {
-        const newSetting = parseFloat(event.target.value, 10);
-        if (!isNaN(newSetting)) {
-            this.setState({[setting]: newSetting})
+        const newValue = parseFloat(event.target.value, 10);
+        const newSettings = { ...this.state.settings };
+        if (isNaN(newValue)) {
+            newSettings[setting] = ""
         } else {
-            this.setState({[setting]: ""})
+            newSettings[setting] = newValue
         }
+        this.setState({ settings: newSettings })
     };
 
-    validate = (setting, value) => {
+    isValid = (setting, value) => {
         switch (setting) {
             case "chunkSize":
                 return typeof(value) === 'number' && value > 0 && value <= 100 && parseInt(value, 10) === value;
@@ -47,7 +49,7 @@ export default class SettingsView extends React.Component {
                        min="1"
                        max="100"
                        className="input"
-                       value={this.state[setting]}
+                       value={this.state.settings[setting]}
                        placeholder={setting}
                        onChange={(event) => this.set(setting, event)}/>
                 <p className="subtleText">{setting}</p>
@@ -56,14 +58,14 @@ export default class SettingsView extends React.Component {
     };
 
     done = () => {
-        const settings = this.state;
+        const settings = this.state.settings;
         for (let setting in settings) {
-            if (settings.hasOwnProperty(setting) && !this.validate(setting, settings[setting])) {
+            if (settings.hasOwnProperty(setting) && !this.isValid(setting, settings[setting])) {
                 alert("Invalid value for " + setting);
                 return;
             }
         }
-        this.props.updateSettings(this.state);
+        this.props.updateSettings(settings);
     };
 
     render() {
