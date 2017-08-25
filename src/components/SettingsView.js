@@ -58,14 +58,13 @@ export default class SettingsView extends React.Component {
     };
 
     done = () => {
-        const settings = this.state.settings;
-        for (let setting in settings) {
-            if (settings.hasOwnProperty(setting) && !this.isValid(setting, settings[setting])) {
+        for (let [setting, value] of Object.entries(this.state.settings)) {
+            if (!this.isValid(setting, value)) {
                 alert("Invalid value for " + setting);
                 return;
             }
         }
-        this.props.updateSettings(settings);
+        this.props.updateSettings(this.state.settings);
     };
 
     render() {
