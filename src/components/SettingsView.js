@@ -32,9 +32,9 @@ export default class SettingsView extends React.Component {
     isValid = (setting, value) => {
         switch (setting) {
             case "chunkSize":
-                return typeof(value) === 'number' && value > 0 && value <= 100 && parseInt(value, 10) === value;
+                return typeof(value) === 'number' && value > 0 && value <= 100 && Number.isInteger(value);
             case "wordLength":
-                return typeof(value) === 'number' && value > 0 && value <= 100 && parseInt(value, 10) === value;
+                return typeof(value) === 'number' && value > 0 && value <= 100 && Number.isInteger(value);
             default:
                 console.error("Couldn't validate unknown setting: " + setting);
                 return false
