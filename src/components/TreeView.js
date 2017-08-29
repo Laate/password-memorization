@@ -20,30 +20,79 @@ export default class TreeView extends React.Component {
     constructor(props) {
         super(props);
 
-        const data = chunkTree(this.props.word, this.props.chunkSize);
+        const savedState = JSON.parse(localStorage.getItem("treeState"));
+        const isSaved =
+            savedState !== null &&
+            savedState.word === this.props.word &&
+            savedState.chunkSize === this.props.chunkSize;
+        const data = isSaved ? savedState.data : chunkTree(this.props.word, this.props.chunkSize);
         this.root =  tree().size([this.props.width, this.props.height])(hierarchy(data, this.getChildren));
         this.nodeList = this.root.descendants();
         this.linkList = this.root.links();
-        this.initNodes();
+        const startNode = this.initNodes(isSaved);
 
         this.state = {
-            currentNode: this.root.leaves()[0],
+            currentNode: startNode,
             input: ""
         };
     }
 
-    // Adding a small margin to nodes, otherwise top node will be cut off.
-    // Setting isSeen to keep track if we need to show the hint text.
-    // Setting isCompleted for coloring and knowing which node to move to.
-    // Setting id as the node's position in a post-order traversal, used for data logging purposes.
-    initNodes = () => {
-        let i = 0;
-        this.root.eachAfter((node) => {
-            node.y += 30;
-            node.data.isSeen = false;
-            node.data.isCompleted = false;
-            node.data.id = i++;
-        })
+    componentDidMount() {
+        window.addEventListener("beforeunload", this.saveTreeState);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("beforeunload", this.saveTreeState);
+        this.saveTreeState();
+    }
+
+    saveTreeState = () => {
+        localStorage.setItem("treeState", JSON.stringify({
+            data: this.root.data,
+            word: this.props.word,
+            chunkSize: this.props.chunkSize
+        }))
+    };
+
+    /*
+     * If we are restoring an old tree state, we want to make sure that the users still remember everything
+     * they typed so far. To achieve this, we reset the tree to the biggest completed or active node,
+     * that is on the leftmost side of the tree.
+     * If we are doing first time initialisation we:
+     *  - add a small top margin to nodes, otherwise top node will be cut off
+     *  - set isSeen to keep track if we need to show the hint text
+     *  - set isCompleted for coloring and knowing which node to move to
+     *  - set id as the node's position in a post-order traversal, used for data logging purposes
+     */
+    initNodes = (isSaved) => {
+        let startNode = this.root.leaves()[0];
+
+        if (isSaved) {
+            while (startNode.parent) {
+                const parent = startNode.parent;
+                if (parent.data.isCompleted || (
+                    parent.data.left[0].isCompleted &&
+                    parent.data.right[0].isCompleted)) {
+                    startNode = parent
+                } else {
+                    break
+                }
+            }
+            this.root.eachAfter((node) => {
+                node.y += 30;
+                if (node.data.id >= startNode.data.id) node.data.isCompleted = false;
+            })
+        } else {
+            let i = 0;
+            this.root.eachAfter((node) => {
+                node.y += 30;
+                node.data.isSeen = false;
+                node.data.isCompleted = false;
+                node.data.id = i++;
+            });
+        }
+
+        return startNode
     };
 
     getChildren = (node) => {
@@ -54,7 +103,7 @@ export default class TreeView extends React.Component {
     };
 
     getNext = (node) => {
-        if (!node.parent) {return this.root}
+        if (!node.parent) return this.root;
 
         let foundNext = false;
         let next = null;
