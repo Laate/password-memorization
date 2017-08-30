@@ -169,11 +169,11 @@ export default class TreeView extends React.Component {
         }
     };
 
-    reset = () => {
+    // Doesn't reset isSeen, meaning hint texts won't be shown again.
+    restart = () => {
         const nodes = this.root.descendants();
         for (let i = 0; i < nodes.length; i++) {
             nodes[i].data.isCompleted = false;
-            nodes[i].data.isSeen = false;
         }
         this.setState({currentNode: this.root.leaves()[0]})
     };
@@ -182,7 +182,7 @@ export default class TreeView extends React.Component {
         const memCount =  parseInt(localStorage.getItem("memorisedCount"), 10) || 0;
         localStorage.setItem("memorisedCount", memCount + 1);
         alert("Memorization completed!");
-        this.reset();
+        this.restart();
     };
 
     render() {
