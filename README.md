@@ -11,7 +11,7 @@ As an example: While recalling a phone number such as **9849523450**, we might b
 
 ## How to run
 
-* `git clone git@version.aalto.fi:usability-stylometry/password-memorization.git`
+* `git clone https://github.com/Laate/password-memorization.git`
 * `cd password-memorization`
 * `npm install`
 * `npm start`
@@ -40,7 +40,7 @@ Handles getting/setting localStorage values for settings and word being memorise
 | hideSettings: boolean   |                         |
 
 
-### SettingsView
+#### SettingsView
 Handles changing settings.
 
 |          **State**            |           **Props**           |
